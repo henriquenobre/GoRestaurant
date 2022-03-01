@@ -1,48 +1,53 @@
-import { Component, createRef } from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 
 import { Form } from './styles';
-import Modal from '../Modal';
 import Input from '../Input';
+import ReactModal from 'react-modal';
 
-class ModalEditFood extends Component {
-  constructor(props) {
-    super(props);
 
-    this.formRef = createRef()
-  }
-
-  handleSubmit = async (data) => {
-    const { setIsOpen, handleUpdateFood } = this.props;
-
-    handleUpdateFood(data);
-    setIsOpen();
-  };
-
-  render() {
-    const { isOpen, setIsOpen, editingFood } = this.props;
+export function ModalEditFood({ modalEditIsOpen, OpenEditModal }) {
 
     return (
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Form ref={this.formRef} onSubmit={this.handleSubmit} initialData={editingFood}>
-          <h1>Editar Prato</h1>
-          <Input name="image" placeholder="Cole o link aqui" />
+        <ReactModal
+            isOpen={modalEditIsOpen}
+            onRequestClose={OpenEditModal}
+            ariaHideApp={false}
+            shouldCloseOnOverlayClick={!false}
+            style={{
+                content: {
+                    top: '50%',
+                    left: '50%',
+                    right: 'auto',
+                    bottom: 'auto',
+                    marginRight: '-50%',
+                    transform: 'translate(-50%, -50%)',
+                    background: '#F0F0F5',
+                    color: '#000000',
+                    borderRadius: '8px',
+                    width: '736px',
+                    border: 'none',
+                },
+                overlay: {
+                    backgroundColor: '#121214e6',
+                },
+            }}>
+            <Form nitialData="">
+                <h1>Editar Prato</h1>
+                <Input name="image" placeholder="Cole o link aqui" />
 
-          <Input name="name" placeholder="Ex: Moda Italiana" />
-          <Input name="price" placeholder="Ex: 19.90" />
+                <Input name="name" placeholder="Ex: Moda Italiana" />
+                <Input name="price" placeholder="Ex: 19.90" />
 
-          <Input name="description" placeholder="Descrição" />
+                <Input name="description" placeholder="Descrição" />
 
-          <button type="submit" data-testid="edit-food-button">
-            <div className="text">Editar Prato</div>
-            <div className="icon">
-              <FiCheckSquare size={24} />
-            </div>
-          </button>
-        </Form>
-      </Modal>
+                <button type="submit" data-testid="edit-food-button">
+                    <div className="text">Editar Prato</div>
+                    <div className="icon">
+                        <FiCheckSquare size={24} />
+                    </div>
+                </button>
+            </Form>
+        </ReactModal>
     );
-  }
-};
+}
 
-export default ModalEditFood;

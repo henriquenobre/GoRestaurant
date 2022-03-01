@@ -1,47 +1,54 @@
-import { Component, createRef } from 'react';
 import { FiCheckSquare } from 'react-icons/fi';
 
 import { Form } from './styles';
-import Modal from '../Modal';
 import Input from '../Input';
+import ReactModal from 'react-modal';
 
-class ModalAddFood extends Component {
-  constructor(props) {
-    super(props);
 
-    this.formRef = createRef();
-  }
+export function ModalAddFood({OpenAddModal, modalAddIsOpen}) {
 
-  handleSubmit = async data => {
-    const { setIsOpen, handleAddFood } = this.props;
 
-    handleAddFood(data);
-    setIsOpen();
-  };
+  return (
+    <ReactModal
+      shouldCloseOnOverlayClick={!false}
+      onRequestClose={OpenAddModal}
+      isOpen={modalAddIsOpen}
+      ariaHideApp={false}
+      style={{
+        content: {
+          top: '50%',
+          left: '50%',
+          right: 'auto',
+          bottom: 'auto',
+          marginRight: '-50%',
+          transform: 'translate(-50%, -50%)',
+          background: '#F0F0F5',
+          color: '#000000',
+          borderRadius: '8px',
+          width: '736px',
+          border: 'none',
+        },
+        overlay: {
+          backgroundColor: '#121214e6',
+        },
+      }}
+    >
+      <Form>
+        <h1>Novo Prato</h1>
+        <Input name="image" placeholder="Cole o link aqui" />
 
-  render() {
-    const { isOpen, setIsOpen } = this.props;
+        <Input name="name" placeholder="Ex: Moda Italiana" />
+        <Input name="price" placeholder="Ex: 19.90" />
 
-    return (
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
-        <Form ref={this.formRef} onSubmit={this.handleSubmit}>
-          <h1>Novo Prato</h1>
-          <Input name="image" placeholder="Cole o link aqui" />
+        <Input name="description" placeholder="Descrição" />
+        <button type="submit" data-testid="add-food-button">
+          <p className="text">Adicionar Prato</p>
+          <div className="icon">
+            <FiCheckSquare size={24} />
+          </div>
+        </button>
+      </Form>
+    </ReactModal>
 
-          <Input name="name" placeholder="Ex: Moda Italiana" />
-          <Input name="price" placeholder="Ex: 19.90" />
-
-          <Input name="description" placeholder="Descrição" />
-          <button type="submit" data-testid="add-food-button">
-            <p className="text">Adicionar Prato</p>
-            <div className="icon">
-              <FiCheckSquare size={24} />
-            </div>
-          </button>
-        </Form>
-      </Modal>
-    );
-  }
-};
-
-export default ModalAddFood;
+  );
+}

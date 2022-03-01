@@ -3,7 +3,7 @@ import { FiPlusSquare } from 'react-icons/fi';
 import { Container } from './styles';
 import Logo from '../../assets/logo.svg';
 
-export function Header (openModal) {
+export function Header ({OpenAddModal}) {
   
     return (
       <Container>
@@ -13,7 +13,7 @@ export function Header (openModal) {
             <div>
               <button
                 type="button"
-                onClick={openModal}
+                onClick={OpenAddModal}
               >
                 <div className="text">Novo Prato</div>
                 <div className="icon">

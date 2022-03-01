@@ -4,7 +4,7 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { Container } from './styles';
 import api from '../../services/api';
 
-export function Food () {
+export function Food ({OpenEditModal}) {
   const [isAvailable, setIsAvailable] = useState(true)
 
 
@@ -25,7 +25,7 @@ export function Food () {
             <button
               type="button"
               className="icon"
-              // onClick={this.setEditingFood}
+              onClick={OpenEditModal}
               // data-testid={`edit-food-${food.id}`}
             >
               <FiEdit3 size={20} />
@@ -59,4 +59,3 @@ export function Food () {
   }
 
 
-export default Food;
