@@ -4,20 +4,20 @@ import { FiEdit3, FiTrash } from 'react-icons/fi';
 import { Container } from './styles';
 import api from '../../services/api';
 
-export function Food ({OpenEditModal}) {
+export function Food ({OpenEditModal, food, handleDelete}) {
   const [isAvailable, setIsAvailable] = useState(true)
 
 
     return (
       <Container available={isAvailable}>
         <header>
-          <img src="https://storage.googleapis.com/golden-wind/bootcamp-gostack/desafio-food/food1.png" alt="Ao molho" />
+          <img src={food.image} alt={food.name} />
         </header>
         <section className="body">
-          <h2>Ao molho</h2>
-          <p>Macarrão ao molho branco, fughi e cheiro verde das montanhas</p>
+          <h2>{food.name}</h2>
+          <p>{food.description}</p>
           <p className="price">
-            R$ <b>19.90</b>
+            R$ <b>{food.price}</b>
           </p>
         </section>
         <section className="footer">
@@ -34,7 +34,7 @@ export function Food ({OpenEditModal}) {
             <button
               type="button"
               className="icon"
-              // onClick={() => handleDelete(food.id)}
+              onClick={()=>handleDelete(food.id)}
               // data-testid={`remove-food-${food.id}`}
             >
               <FiTrash size={20} />
