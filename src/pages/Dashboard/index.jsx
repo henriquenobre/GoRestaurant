@@ -30,7 +30,6 @@ export function Dashboard() {
 
   function handleAddFood(updateFoods) {
     setFoods(updateFoods);
-    console.log(foods);
   }
 
   function handleDeleteFood(foodId) {
