@@ -1,49 +1,17 @@
-import {
-  useEffect,
-  useRef,
-  useState,
-  useCallback,
-} from 'react';
-
-import { useField } from '@unform/core';
-
+import { useState } from 'react';
 import { Container } from './styles';
 
 const Input = ({ name, icon: Icon, ...rest }) => {
-  const inputRef = useRef(null);
-
-  const [isFocused, setIsFocused] = useState(false);
-  const [isFilled, setIsFilled] = useState(false);
-
-  const { fieldName, defaultValue, registerField } = useField(name);
-
-  const handleInputFocus = useCallback(() => {
-    setIsFocused(true);
-  }, []);
-
-  const handleInputBlur = useCallback(() => {
-    setIsFocused(false);
-
-    setIsFilled(!!inputRef.current?.value);
-  }, []);
-
-  useEffect(() => {
-    registerField({
-      name: fieldName,
-      ref: inputRef.current,
-      path: 'value',
-    });
-  }, [fieldName, registerField]);
+  const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <Container isFilled={isFilled} isFocused={isFocused}>
+    <Container 
+    isFocused={isFocused} 
+    >
       {Icon && <Icon size={20} />}
 
       <input
-        onFocus={handleInputFocus}
-        onBlur={handleInputBlur}
-        defaultValue={defaultValue}
-        ref={inputRef}
+      onFocus={()=>setIsFocused(true)}
         {...rest}
       />
     </Container>

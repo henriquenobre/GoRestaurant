@@ -25,13 +25,7 @@ export const Container = styled.div`
     props.isFocused &&
     css`
       color: #ff9000;
-      border-color: #ff9000;
-    `}
-
-  ${props =>
-    props.isFilled &&
-    css`
-      color: #ff9000;
+      border: solid 1px #ff9000;
     `}
 
   input {
@@ -43,6 +37,12 @@ export const Container = styled.div`
     &::placeholder {
       color: #b7b7cc;
     }
+
+    ${props =>
+    props.isFocused &&
+    css`
+      color: #ff9000;
+    `}
   }
 
   svg {
