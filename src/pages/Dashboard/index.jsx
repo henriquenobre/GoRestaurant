@@ -46,8 +46,8 @@ export function Dashboard() {
     }
   }
 
-  function handleEditFood(){
-
+  function handleEditFood(updateFoods){
+    setFoods(updateFoods);
   }
 
   return (

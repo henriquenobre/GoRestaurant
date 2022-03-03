@@ -5,7 +5,7 @@ import { Container } from './styles';
 import { ModalEditFood } from "../../components/ModalEditFood";
 
 
-export function Food ({foods, food, handleDelete}) {
+export function Food ({foods, food, handleDelete, handleEditFood}) {
   const [isAvailable, setIsAvailable] = useState(true)
   const [modalEditIsOpen, SetModalEditIsOpen] = useState(false);
 
@@ -21,6 +21,7 @@ export function Food ({foods, food, handleDelete}) {
         OpenEditModal={OpenEditModal}
         foods={foods}
         food={food}
+        handleEditFood={handleEditFood}
       />
         <header>
           <img src={food.image} alt={food.name} />
@@ -38,7 +39,6 @@ export function Food ({foods, food, handleDelete}) {
               type="button"
               className="icon"
               onClick={OpenEditModal}
-              // data-testid={`edit-food-${food.id}`}
             >
               <FiEdit3 size={20} />
             </button>
