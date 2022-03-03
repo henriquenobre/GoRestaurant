@@ -53,9 +53,9 @@ export function ModalEditFood({ modalEditIsOpen, OpenEditModal, foods, food }) {
             }}>
             <Form onSubmit={handleSubmit}>
                 <h1>Editar Prato</h1>
-                <Input name="image" value={food.image} onChange={handleChange} />
+                <Input name="image" defaultValue={food.image} onChange={handleChange} />
 
-                <Input type="text" name="name" value={food.name} onChange={handleChange} />
+                <Input name="name" defaultValue={food.name} onChange={handleChange} />
                 <Input name="price" value={food.price} onChange={handleChange} />
 
                 <Input name="description" value={food.description} onChange={handleChange} />
