@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { FiCheckSquare } from 'react-icons/fi';
 
 import { Form } from './styles';
@@ -5,7 +7,25 @@ import Input from '../Input';
 import ReactModal from 'react-modal';
 
 
-export function ModalEditFood({ modalEditIsOpen, OpenEditModal }) {
+export function ModalEditFood({ modalEditIsOpen, OpenEditModal, foods, food }) {
+    const [formData, setFormData] = useState({});
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value.trim(),
+        });
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const updateFood = { ...formData, id: food.id, available: true };
+        const updateFoods = [...foods]
+        const productIndex = updateFoods.findIndex((foods) => foods.id === food.id);
+        updateFoods[productIndex] = updateFood
+        console.log(updateFoods);
+        // OpenEditModal()
+    };
 
     return (
         <ReactModal
@@ -31,14 +51,14 @@ export function ModalEditFood({ modalEditIsOpen, OpenEditModal }) {
                     backgroundColor: '#121214e6',
                 },
             }}>
-            <Form nitialData="">
+            <Form onSubmit={handleSubmit}>
                 <h1>Editar Prato</h1>
-                <Input name="image" placeholder="Cole o link aqui" />
+                <Input name="image" value={food.image} onChange={handleChange} />
 
-                <Input name="name" placeholder="Ex: Moda Italiana" />
-                <Input name="price" placeholder="Ex: 19.90" />
+                <Input type="text" name="name" value={food.name} onChange={handleChange} />
+                <Input name="price" value={food.price} onChange={handleChange} />
 
-                <Input name="description" placeholder="Descrição" />
+                <Input name="description" value={food.description} onChange={handleChange} />
 
                 <button type="submit" data-testid="edit-food-button">
                     <div className="text">Editar Prato</div>

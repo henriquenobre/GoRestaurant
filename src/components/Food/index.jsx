@@ -2,14 +2,26 @@ import { useState } from 'react';
 import { FiEdit3, FiTrash } from 'react-icons/fi';
 
 import { Container } from './styles';
-import api from '../../services/api';
+import { ModalEditFood } from "../../components/ModalEditFood";
 
-export function Food ({OpenEditModal, food, handleDelete}) {
+
+export function Food ({foods, food, handleDelete}) {
   const [isAvailable, setIsAvailable] = useState(true)
+  const [modalEditIsOpen, SetModalEditIsOpen] = useState(false);
+
+  function OpenEditModal() {
+    SetModalEditIsOpen((prevCheck) => !prevCheck);
+  }
 
 
     return (
       <Container available={isAvailable}>
+         <ModalEditFood
+        modalEditIsOpen={modalEditIsOpen}
+        OpenEditModal={OpenEditModal}
+        foods={foods}
+        food={food}
+      />
         <header>
           <img src={food.image} alt={food.name} />
         </header>
